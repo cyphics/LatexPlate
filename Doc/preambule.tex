@@ -1,0 +1,98 @@
+\usepackage{microtype}
+
+
+
+% =================================
+% ENCODING
+% =================================
+
+\usepackage[francais]{babel}
+%\usepackage{fontspec}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[hyphens]{url}
+% For japanese font
+\usepackage{xeCJK}
+\setCJKmainfont{IPAMincho} % for \rmfamily
+%\DeclareUnicodeCharacter{00A0}{ } % Semble servir à identifier
+% l'erreur lorsqu'un caractère ne respecte pas UTF-8
+
+% =================================
+% LAYOUT GENERAL
+% =================================
+
+\usepackage{parskip}
+\setlength{\parskip}{.5em}
+
+% =================================
+% TABLE DES MATIERES
+% =================================
+
+% redefine space after part number in toc
+\renewcommand\partnumberlinebox[2]{#2\hspace{1em}}
+\setcounter{tocdepth}{2} % set Table of Contents depth
+% Reset chapter number for every part
+\makeatletter
+\@addtoreset{chapter}{part}
+\makeatother
+
+% =================================
+% BIBLIO
+% =================================
+\usepackage[backend=biber,style=authoryear,doi=false,isbn=false,url=false,firstinits=true]{biblatex}
+\addbibresource{These.bib}
+%\nocite{*}
+\AtEveryBibitem{%
+  \clearfield{note}%
+  }
+
+
+% =================================
+% LINGUISTIQUE
+% =================================
+
+\usepackage{linguex}
+
+\newcommand{\guill}[1]{\guillemotleft#1\guillemotright}
+\newcommand\cad[1]{\textsc{#1}*}
+\newcommand\cah{concepts \emph{ad hoc}}
+\newcommand\tcah{théorie des \cah}
+\newcommand\mention[1]{`#1'}
+\newcommand\mot[1]{\emph{#1}}
+\newcommand{\concept}[1]{\emph{#1}}
+\newcommand{\boiteAExemples}[2]{\textbf{#1 :}\\\textit{#2}}
+\newcommand\explicitation[1]{``#1''}
+
+
+% =================================
+% CITATIONS
+% =================================
+
+%\usepackage[svgnames]{xcolor}
+\usepackage[table,svgnames]{xcolor}
+\usepackage{csquotes}
+\usepackage{tikz}
+\usepackage{framed}
+\usepackage{mdframed}
+% \usepackage{etoolbox}
+\newcommand\reprise[1]{``#1''}
+\newcommand\auteur[1]{\textsc{#1}}
+\newcommand\enonce[1]{``#1''}
+\newcommand*\quotefont{\fontfamily{LinuxLibertineT-LF}}
+% relative
+
+%\input{macro_shadequote}
+
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={blue!40!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master:"these"
+%%% End:

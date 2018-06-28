@@ -1,0 +1,198 @@
+#+TITLE: IDEC Project
+#+FILETAGS: :computer
+* Tasks
+** DONE Remise Cahier charges
+   CLOSED: [2018-05-29 mar. 09:14] SCHEDULED: <2018-05-10 Thu>
+   DEADLINE: <2018-05-17 Thu>
+   :PROPERTIES:
+   :ID:       ffbc842e-1a09-42a1-91bd-3bed21d911e9
+   :END:
+** Examen
+   DEADLINE: <2018-06-25 Mon>
+* Features
+** Manage lists
+*** DONE Lister tous les packages (déjà dans base de données)
+   CLOSED: [2018-05-29 mar. 09:19]
+*** IN-PROGRESS Enregistrer templates existants
+*** DONE Set DocType
+    CLOSED: [2018-05-31 Thu 13:04]
+*** DONE Set Lang
+    CLOSED: [2018-05-31 Thu 13:04]
+*** IN-PROGRESS Set Enability of widgets
+** Code generation
+*** TODO Exporter fichier
+*** CANCELED Gérer incompatibilités
+   CLOSED: [2018-05-29 mar. 09:20]
+
+*** CANCELED Gérer ordres des packages
+   CLOSED: [2018-05-29 mar. 09:19]
+*** TODO Close button
+*** TODO Add comments
+** Dependencies managment
+** TODO Générer / mettre à jour base de données
+** FIXME
+*** TODO CurrentItem
+*** DONE Save in DB
+    CLOSED: [2018-05-31 Thu 15:30]
+*** DONE Research fields
+    CLOSED: [2018-05-31 Thu 15:44]
+
+* Algorithmes
+** Etablir liste des méta d'un template
+Problème: éviter la récursivité
+Fonction: List<Meta> Scanner(List<Meta>)
+1) Scanner premier meta de la liste
+2) Si pas dans liste finale, ajouter et lancer scan sur ces meta à lui
+3) Sinon, passer au suivant
+* Database structure
+** Tables
+*** Template
+*** Package
+*** Macro
+* Several commands
+** Database creation
+CREATE TABLE [dbo].[Template] (
+    [Id]   INT           IDENTITY (1, 1) NOT NULL,
+    [Nom]  VARCHAR (20)  NOT NULL,
+    [Desc] VARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[Macro] (
+    [Id]   INT           IDENTITY (1, 1) NOT NULL,
+    [Nom]  VARCHAR (20)  NOT NULL,
+    [Desc] VARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[Package] (
+    [Id]   INT           IDENTITY (1, 1) NOT NULL,
+    [Nom]  VARCHAR (20)  NOT NULL,
+    [Desc] VARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[Meta] (
+    [Id]   INT           IDENTITY (1, 1) NOT NULL,
+    [Nom]  VARCHAR (20)  NOT NULL,
+    [Desc] VARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[Environment] (
+    [Id]   INT           IDENTITY (1, 1) NOT NULL,
+    [Nom]  VARCHAR (20)  NOT NULL,
+    [Desc] VARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].TemplateMeta
+(
+    [Template_FK] INT NOT NULL,
+    [Meta_FK] INT NOT NULL,
+    [Nom] VARCHAR(50) NOT NULL,
+    [Desc] VARCHAR(MAX) NULL,
+    PRIMARY KEY ([Template_FK], [Meta_FK]),
+	CONSTRAINT [FK_TemplateMeta_to_Template] FOREIGN KEY ([Template_FK]) REFERENCES [dbo].Template ([Id]),
+	CONSTRAINT [FK_TemplateMeta_to_Meta] FOREIGN KEY ([Meta_FK]) REFERENCES [dbo].Meta ([Id]),
+)
+
+CREATE TABLE [dbo].TemplatePackage
+(
+    [Template_FK] INT NOT NULL,
+    [Package_FK] INT NOT NULL,
+    [Nom] VARCHAR(50) NOT NULL,
+    [Desc] VARCHAR(MAX) NULL,
+    PRIMARY KEY ([Template_FK], [Package_FK]),
+	CONSTRAINT [FK_TemplatePackage_to_Template] FOREIGN KEY ([Template_FK]) REFERENCES [dbo].Template ([Id]),
+	CONSTRAINT [FK_TemplatePackage_to_Package] FOREIGN KEY ([Package_FK]) REFERENCES [dbo].Package ([Id]),
+)
+
+
+CREATE TABLE [dbo].TemplateEnvironment
+(
+    [Template_FK] INT NOT NULL,
+    [Environment_FK] INT NOT NULL,
+    [Nom] VARCHAR(50) NOT NULL,
+    [Desc] VARCHAR(MAX) NULL,
+    PRIMARY KEY ([Template_FK], [Environment_FK]),
+	CONSTRAINT [FK_TemplateEnvironment_to_Template] FOREIGN KEY ([Template_FK]) REFERENCES [dbo].Template ([Id]),
+	CONSTRAINT [FK_TemplateEnvironment_to_Environment] FOREIGN KEY ([Environment_FK]) REFERENCES [dbo].Environment ([Id]),
+)
+
+
+CREATE TABLE [dbo].TemplateMacro
+(
+[Template_FK] INT NOT NULL,
+[Macro_FK] INT NOT NULL,
+[Nom] VARCHAR(50) NOT NULL,
+[Desc] VARCHAR(MAX) NULL,
+PRIMARY KEY ([Template_FK], [Macro_FK]),
+CONSTRAINT [FK_TemplateMacro_to_Template] FOREIGN KEY ([Template_FK]) REFERENCES [dbo].Template ([Id]),
+CONSTRAINT [FK_TemplateMacro_to_Macro] FOREIGN KEY ([Macro_FK]) REFERENCES [dbo].Macro ([Id]),
+)
+
+CREATE TABLE [dbo].PackageMeta
+(
+    [Package_FK] INT NOT NULL,
+    [Meta_FK] INT NOT NULL,
+    [Nom] VARCHAR(50) NOT NULL,
+    [Desc] VARCHAR(MAX) NULL,
+    PRIMARY KEY ([Package_FK], [Meta_FK]),
+	CONSTRAINT [FK_PackageMeta_to_Package] FOREIGN KEY ([Package_FK]) REFERENCES [dbo].Package ([Id]),
+	CONSTRAINT [FK_PackageMeta_to_Meta] FOREIGN KEY ([Meta_FK]) REFERENCES [dbo].Meta ([Id]),
+)
+
+CREATE TABLE [dbo].PackageMacro
+(
+    [Package_FK] INT NOT NULL,
+    [Macro_FK] INT NOT NULL,
+    [Nom] VARCHAR(50) NOT NULL,
+    [Desc] VARCHAR(MAX) NULL,
+    PRIMARY KEY ([Package_FK], [Macro_FK]),
+	CONSTRAINT [FK_PackageMacro_to_Package] FOREIGN KEY ([Package_FK]) REFERENCES [dbo].Package ([Id]),
+	CONSTRAINT [FK_PackageMacro_to_Macro] FOREIGN KEY ([Macro_FK]) REFERENCES [dbo].Macro ([Id]),
+)
+
+CREATE TABLE [dbo].PackageEnvironment
+(
+    [Package_FK] INT NOT NULL,
+    [Environment_FK] INT NOT NULL,
+    [Nom] VARCHAR(50) NOT NULL,
+    [Desc] VARCHAR(MAX) NULL,
+    PRIMARY KEY ([Package_FK], [Environment_FK]),
+	CONSTRAINT [FK_PackageEnvironment_to_Package] FOREIGN KEY ([Package_FK]) REFERENCES [dbo].Package ([Id]),
+	CONSTRAINT [FK_PackageEnvironment_to_Environment] FOREIGN KEY ([Environment_FK]) REFERENCES [dbo].Environment ([Id]),
+)
+
+
+CREATE TABLE [dbo].EnvironmentMeta
+(
+    [Environment_FK] INT NOT NULL,
+    [Meta_FK] INT NOT NULL,
+    [Nom] VARCHAR(50) NOT NULL,
+    [Desc] VARCHAR(MAX) NULL,
+    PRIMARY KEY ([Environment_FK], [Meta_FK]),
+	CONSTRAINT [FK_EnvironmentMeta_to_Environment] FOREIGN KEY ([Environment_FK]) REFERENCES [dbo].Environment ([Id]),
+	CONSTRAINT [FK_EnvironmentMeta_to_Meta] FOREIGN KEY ([Meta_FK]) REFERENCES [dbo].Meta ([Id]),
+)
+
+CREATE TABLE [dbo].MacroMeta
+(
+    [Macro_FK] INT NOT NULL,
+    [Meta_FK] INT NOT NULL,
+    [Nom] VARCHAR(50) NOT NULL,
+    [Desc] VARCHAR(MAX) NULL,
+    PRIMARY KEY ([Macro_FK], [Meta_FK]),
+	CONSTRAINT [FK_MacroMeta_to_Macro] FOREIGN KEY ([Macro_FK]) REFERENCES [dbo].Macro ([Id]),
+	CONSTRAINT [FK_MacroMeta_to_Meta] FOREIGN KEY ([Meta_FK]) REFERENCES [dbo].Meta ([Id]),
+)
+* Views
+** Template
+** Macro
+** Environment
+** Meta
+** Configy
+* Fixes
+- Numérotation des redondances
+- Boutons excédentaires des macros

@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="WpfMainView.Controls.UCSearchBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfMainView.Controls"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
+             mc:Ignorable="d" 
+             d:DesignHeight="25" d:DesignWidth="100">
+    <Grid>
+        <StackPanel>
+            <TextBox x:Name="textBoxRechercher" mah:TextBoxHelper.Watermark="Recherche..." KeyUp="textBoxRechercher_KeyUp" />
+        </StackPanel>
+    </Grid>
+</UserControl>

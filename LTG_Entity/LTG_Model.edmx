@@ -1,0 +1,1086 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LTGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DocType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Desc" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Environment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Desc" Type="varchar(max)" />
+          <Property Name="CodeBefore" Type="varchar(max)" />
+          <Property Name="CodeAfter" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="EnvironmentPackage">
+          <Key>
+            <PropertyRef Name="Package_FK" />
+            <PropertyRef Name="Environment_FK" />
+          </Key>
+          <Property Name="Package_FK" Type="int" Nullable="false" />
+          <Property Name="Environment_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Langue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Macro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Desc" Type="varchar(max)" />
+          <Property Name="Code" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="MacroPackage">
+          <Key>
+            <PropertyRef Name="Package_FK" />
+            <PropertyRef Name="Macro_FK" />
+          </Key>
+          <Property Name="Package_FK" Type="int" Nullable="false" />
+          <Property Name="Macro_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Desc" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="MetaEnvironment">
+          <Key>
+            <PropertyRef Name="Environment_FK" />
+            <PropertyRef Name="Meta_FK" />
+          </Key>
+          <Property Name="Environment_FK" Type="int" Nullable="false" />
+          <Property Name="Meta_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MetaMacro">
+          <Key>
+            <PropertyRef Name="Macro_FK" />
+            <PropertyRef Name="Meta_FK" />
+          </Key>
+          <Property Name="Macro_FK" Type="int" Nullable="false" />
+          <Property Name="Meta_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MetaMeta">
+          <Key>
+            <PropertyRef Name="Meta1_FK" />
+            <PropertyRef Name="Meta2_FK" />
+          </Key>
+          <Property Name="Meta1_FK" Type="int" Nullable="false" />
+          <Property Name="Meta2_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MetaPackage">
+          <Key>
+            <PropertyRef Name="Package_FK" />
+            <PropertyRef Name="Meta_FK" />
+          </Key>
+          <Property Name="Package_FK" Type="int" Nullable="false" />
+          <Property Name="Meta_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Desc" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ScanDir">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Path" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Desc" Type="varchar(max)" />
+          <Property Name="LangueID" Type="int" Nullable="false" />
+          <Property Name="DocTypeID" Type="int" Nullable="false" />
+          <Property Name="Hyperref" Type="bit" />
+          <Property Name="Encoding" Type="bit" />
+        </EntityType>
+        <EntityType Name="TemplateEnvironment">
+          <Key>
+            <PropertyRef Name="Template_FK" />
+            <PropertyRef Name="Environment_FK" />
+          </Key>
+          <Property Name="Template_FK" Type="int" Nullable="false" />
+          <Property Name="Environment_FK" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="TemplateMacro">
+          <Key>
+            <PropertyRef Name="Template_FK" />
+            <PropertyRef Name="Macro_FK" />
+          </Key>
+          <Property Name="Template_FK" Type="int" Nullable="false" />
+          <Property Name="Macro_FK" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="TemplateMeta">
+          <Key>
+            <PropertyRef Name="Template_FK" />
+            <PropertyRef Name="Meta_FK" />
+          </Key>
+          <Property Name="Template_FK" Type="int" Nullable="false" />
+          <Property Name="Meta_FK" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="TemplatePackage">
+          <Key>
+            <PropertyRef Name="Template_FK" />
+            <PropertyRef Name="Package_FK" />
+          </Key>
+          <Property Name="Template_FK" Type="int" Nullable="false" />
+          <Property Name="Package_FK" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_EnvironmentMeta_to_Environment">
+          <End Role="Environment" Type="Self.Environment" Multiplicity="1" />
+          <End Role="MetaEnvironment" Type="Self.MetaEnvironment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Environment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MetaEnvironment">
+              <PropertyRef Name="Environment_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnvironmentMeta_to_Meta">
+          <End Role="Meta" Type="Self.Meta" Multiplicity="1" />
+          <End Role="MetaEnvironment" Type="Self.MetaEnvironment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MetaEnvironment">
+              <PropertyRef Name="Meta_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MacroMeta_to_Macro">
+          <End Role="Macro" Type="Self.Macro" Multiplicity="1" />
+          <End Role="MetaMacro" Type="Self.MetaMacro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Macro">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MetaMacro">
+              <PropertyRef Name="Macro_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MacroMeta_to_Meta">
+          <End Role="Meta" Type="Self.Meta" Multiplicity="1" />
+          <End Role="MetaMacro" Type="Self.MetaMacro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MetaMacro">
+              <PropertyRef Name="Meta_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Meta1_to_MetaMeta">
+          <End Role="Meta" Type="Self.Meta" Multiplicity="1" />
+          <End Role="MetaMeta" Type="Self.MetaMeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MetaMeta">
+              <PropertyRef Name="Meta1_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Meta2_to_MetaMeta">
+          <End Role="Meta" Type="Self.Meta" Multiplicity="1" />
+          <End Role="MetaMeta" Type="Self.MetaMeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MetaMeta">
+              <PropertyRef Name="Meta2_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PackageEnvironment_to_Environment">
+          <End Role="Environment" Type="Self.Environment" Multiplicity="1" />
+          <End Role="EnvironmentPackage" Type="Self.EnvironmentPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Environment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EnvironmentPackage">
+              <PropertyRef Name="Environment_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PackageEnvironment_to_Package">
+          <End Role="Package" Type="Self.Package" Multiplicity="1" />
+          <End Role="EnvironmentPackage" Type="Self.EnvironmentPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EnvironmentPackage">
+              <PropertyRef Name="Package_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PackageMacro_to_Macro">
+          <End Role="Macro" Type="Self.Macro" Multiplicity="1" />
+          <End Role="MacroPackage" Type="Self.MacroPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Macro">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MacroPackage">
+              <PropertyRef Name="Macro_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PackageMacro_to_Package">
+          <End Role="Package" Type="Self.Package" Multiplicity="1" />
+          <End Role="MacroPackage" Type="Self.MacroPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MacroPackage">
+              <PropertyRef Name="Package_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PackageMeta_to_Meta">
+          <End Role="Meta" Type="Self.Meta" Multiplicity="1" />
+          <End Role="MetaPackage" Type="Self.MetaPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MetaPackage">
+              <PropertyRef Name="Meta_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PackageMeta_to_Package">
+          <End Role="Package" Type="Self.Package" Multiplicity="1" />
+          <End Role="MetaPackage" Type="Self.MetaPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MetaPackage">
+              <PropertyRef Name="Package_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Template_Doctype">
+          <End Role="DocType" Type="Self.DocType" Multiplicity="1" />
+          <End Role="Template" Type="Self.Template" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Template">
+              <PropertyRef Name="DocTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Template_Langue">
+          <End Role="Langue" Type="Self.Langue" Multiplicity="1" />
+          <End Role="Template" Type="Self.Template" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Langue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Template">
+              <PropertyRef Name="LangueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateEnvironment_to_Environment">
+          <End Role="Environment" Type="Self.Environment" Multiplicity="1" />
+          <End Role="TemplateEnvironment" Type="Self.TemplateEnvironment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Environment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateEnvironment">
+              <PropertyRef Name="Environment_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateEnvironment_to_Template">
+          <End Role="Template" Type="Self.Template" Multiplicity="1" />
+          <End Role="TemplateEnvironment" Type="Self.TemplateEnvironment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateEnvironment">
+              <PropertyRef Name="Template_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateMacro_to_Macro">
+          <End Role="Macro" Type="Self.Macro" Multiplicity="1" />
+          <End Role="TemplateMacro" Type="Self.TemplateMacro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Macro">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateMacro">
+              <PropertyRef Name="Macro_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateMacro_to_Template">
+          <End Role="Template" Type="Self.Template" Multiplicity="1" />
+          <End Role="TemplateMacro" Type="Self.TemplateMacro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateMacro">
+              <PropertyRef Name="Template_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateMeta_to_Meta">
+          <End Role="Meta" Type="Self.Meta" Multiplicity="1" />
+          <End Role="TemplateMeta" Type="Self.TemplateMeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateMeta">
+              <PropertyRef Name="Meta_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateMeta_to_Template">
+          <End Role="Template" Type="Self.Template" Multiplicity="1" />
+          <End Role="TemplateMeta" Type="Self.TemplateMeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateMeta">
+              <PropertyRef Name="Template_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplatePackage_to_Package">
+          <End Role="Package" Type="Self.Package" Multiplicity="1" />
+          <End Role="TemplatePackage" Type="Self.TemplatePackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplatePackage">
+              <PropertyRef Name="Package_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplatePackage_to_Template">
+          <End Role="Template" Type="Self.Template" Multiplicity="1" />
+          <End Role="TemplatePackage" Type="Self.TemplatePackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplatePackage">
+              <PropertyRef Name="Template_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LTGModelStoreContainer">
+          <EntitySet Name="DocType" EntityType="Self.DocType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Environment" EntityType="Self.Environment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EnvironmentPackage" EntityType="Self.EnvironmentPackage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Langue" EntityType="Self.Langue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Macro" EntityType="Self.Macro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MacroPackage" EntityType="Self.MacroPackage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meta" EntityType="Self.Meta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetaEnvironment" EntityType="Self.MetaEnvironment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetaMacro" EntityType="Self.MetaMacro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetaMeta" EntityType="Self.MetaMeta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetaPackage" EntityType="Self.MetaPackage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScanDir" EntityType="Self.ScanDir" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Template" EntityType="Self.Template" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplateEnvironment" EntityType="Self.TemplateEnvironment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplateMacro" EntityType="Self.TemplateMacro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplateMeta" EntityType="Self.TemplateMeta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplatePackage" EntityType="Self.TemplatePackage" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EnvironmentMeta_to_Environment" Association="Self.FK_EnvironmentMeta_to_Environment">
+            <End Role="Environment" EntitySet="Environment" />
+            <End Role="MetaEnvironment" EntitySet="MetaEnvironment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnvironmentMeta_to_Meta" Association="Self.FK_EnvironmentMeta_to_Meta">
+            <End Role="Meta" EntitySet="Meta" />
+            <End Role="MetaEnvironment" EntitySet="MetaEnvironment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MacroMeta_to_Macro" Association="Self.FK_MacroMeta_to_Macro">
+            <End Role="Macro" EntitySet="Macro" />
+            <End Role="MetaMacro" EntitySet="MetaMacro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MacroMeta_to_Meta" Association="Self.FK_MacroMeta_to_Meta">
+            <End Role="Meta" EntitySet="Meta" />
+            <End Role="MetaMacro" EntitySet="MetaMacro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meta1_to_MetaMeta" Association="Self.FK_Meta1_to_MetaMeta">
+            <End Role="Meta" EntitySet="Meta" />
+            <End Role="MetaMeta" EntitySet="MetaMeta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meta2_to_MetaMeta" Association="Self.FK_Meta2_to_MetaMeta">
+            <End Role="Meta" EntitySet="Meta" />
+            <End Role="MetaMeta" EntitySet="MetaMeta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PackageEnvironment_to_Environment" Association="Self.FK_PackageEnvironment_to_Environment">
+            <End Role="Environment" EntitySet="Environment" />
+            <End Role="EnvironmentPackage" EntitySet="EnvironmentPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PackageEnvironment_to_Package" Association="Self.FK_PackageEnvironment_to_Package">
+            <End Role="Package" EntitySet="Package" />
+            <End Role="EnvironmentPackage" EntitySet="EnvironmentPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PackageMacro_to_Macro" Association="Self.FK_PackageMacro_to_Macro">
+            <End Role="Macro" EntitySet="Macro" />
+            <End Role="MacroPackage" EntitySet="MacroPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PackageMacro_to_Package" Association="Self.FK_PackageMacro_to_Package">
+            <End Role="Package" EntitySet="Package" />
+            <End Role="MacroPackage" EntitySet="MacroPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PackageMeta_to_Meta" Association="Self.FK_PackageMeta_to_Meta">
+            <End Role="Meta" EntitySet="Meta" />
+            <End Role="MetaPackage" EntitySet="MetaPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PackageMeta_to_Package" Association="Self.FK_PackageMeta_to_Package">
+            <End Role="Package" EntitySet="Package" />
+            <End Role="MetaPackage" EntitySet="MetaPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Template_Doctype" Association="Self.FK_Template_Doctype">
+            <End Role="DocType" EntitySet="DocType" />
+            <End Role="Template" EntitySet="Template" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Template_Langue" Association="Self.FK_Template_Langue">
+            <End Role="Langue" EntitySet="Langue" />
+            <End Role="Template" EntitySet="Template" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateEnvironment_to_Environment" Association="Self.FK_TemplateEnvironment_to_Environment">
+            <End Role="Environment" EntitySet="Environment" />
+            <End Role="TemplateEnvironment" EntitySet="TemplateEnvironment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateEnvironment_to_Template" Association="Self.FK_TemplateEnvironment_to_Template">
+            <End Role="Template" EntitySet="Template" />
+            <End Role="TemplateEnvironment" EntitySet="TemplateEnvironment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateMacro_to_Macro" Association="Self.FK_TemplateMacro_to_Macro">
+            <End Role="Macro" EntitySet="Macro" />
+            <End Role="TemplateMacro" EntitySet="TemplateMacro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateMacro_to_Template" Association="Self.FK_TemplateMacro_to_Template">
+            <End Role="Template" EntitySet="Template" />
+            <End Role="TemplateMacro" EntitySet="TemplateMacro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateMeta_to_Meta" Association="Self.FK_TemplateMeta_to_Meta">
+            <End Role="Meta" EntitySet="Meta" />
+            <End Role="TemplateMeta" EntitySet="TemplateMeta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateMeta_to_Template" Association="Self.FK_TemplateMeta_to_Template">
+            <End Role="Template" EntitySet="Template" />
+            <End Role="TemplateMeta" EntitySet="TemplateMeta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplatePackage_to_Package" Association="Self.FK_TemplatePackage_to_Package">
+            <End Role="Package" EntitySet="Package" />
+            <End Role="TemplatePackage" EntitySet="TemplatePackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplatePackage_to_Template" Association="Self.FK_TemplatePackage_to_Template">
+            <End Role="Template" EntitySet="Template" />
+            <End Role="TemplatePackage" EntitySet="TemplatePackage" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LTGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LTGEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DocTypes" EntityType="LTGModel.DocType" />
+          <EntitySet Name="Environments" EntityType="LTGModel.Environment" />
+          <EntitySet Name="Langues" EntityType="LTGModel.Langue" />
+          <EntitySet Name="Macroes" EntityType="LTGModel.Macro" />
+          <EntitySet Name="Metas" EntityType="LTGModel.Meta" />
+          <EntitySet Name="Packages" EntityType="LTGModel.Package" />
+          <EntitySet Name="Templates" EntityType="LTGModel.Template" />
+          <EntitySet Name="TemplateEnvironments" EntityType="LTGModel.TemplateEnvironment" />
+          <EntitySet Name="TemplateMacroes" EntityType="LTGModel.TemplateMacro" />
+          <EntitySet Name="TemplateMetas" EntityType="LTGModel.TemplateMeta" />
+          <EntitySet Name="TemplatePackages" EntityType="LTGModel.TemplatePackage" />
+          <AssociationSet Name="FK_Template_Doctype" Association="LTGModel.FK_Template_Doctype">
+            <End Role="DocType" EntitySet="DocTypes" />
+            <End Role="Template" EntitySet="Templates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateEnvironment_to_Environment" Association="LTGModel.FK_TemplateEnvironment_to_Environment">
+            <End Role="Environment" EntitySet="Environments" />
+            <End Role="TemplateEnvironment" EntitySet="TemplateEnvironments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Template_Langue" Association="LTGModel.FK_Template_Langue">
+            <End Role="Langue" EntitySet="Langues" />
+            <End Role="Template" EntitySet="Templates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateMacro_to_Macro" Association="LTGModel.FK_TemplateMacro_to_Macro">
+            <End Role="Macro" EntitySet="Macroes" />
+            <End Role="TemplateMacro" EntitySet="TemplateMacroes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateMeta_to_Meta" Association="LTGModel.FK_TemplateMeta_to_Meta">
+            <End Role="Meta" EntitySet="Metas" />
+            <End Role="TemplateMeta" EntitySet="TemplateMetas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplatePackage_to_Package" Association="LTGModel.FK_TemplatePackage_to_Package">
+            <End Role="Package" EntitySet="Packages" />
+            <End Role="TemplatePackage" EntitySet="TemplatePackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateEnvironment_to_Template" Association="LTGModel.FK_TemplateEnvironment_to_Template">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="TemplateEnvironment" EntitySet="TemplateEnvironments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateMacro_to_Template" Association="LTGModel.FK_TemplateMacro_to_Template">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="TemplateMacro" EntitySet="TemplateMacroes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateMeta_to_Template" Association="LTGModel.FK_TemplateMeta_to_Template">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="TemplateMeta" EntitySet="TemplateMetas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplatePackage_to_Template" Association="LTGModel.FK_TemplatePackage_to_Template">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="TemplatePackage" EntitySet="TemplatePackages" />
+          </AssociationSet>
+          <AssociationSet Name="EnvironmentPackage" Association="LTGModel.EnvironmentPackage">
+            <End Role="Environment" EntitySet="Environments" />
+            <End Role="Package" EntitySet="Packages" />
+          </AssociationSet>
+          <AssociationSet Name="MacroPackage" Association="LTGModel.MacroPackage">
+            <End Role="Macro" EntitySet="Macroes" />
+            <End Role="Package" EntitySet="Packages" />
+          </AssociationSet>
+          <AssociationSet Name="MetaEnvironment" Association="LTGModel.MetaEnvironment">
+            <End Role="Environment" EntitySet="Environments" />
+            <End Role="Meta" EntitySet="Metas" />
+          </AssociationSet>
+          <AssociationSet Name="MetaMacro" Association="LTGModel.MetaMacro">
+            <End Role="Macro" EntitySet="Macroes" />
+            <End Role="Meta" EntitySet="Metas" />
+          </AssociationSet>
+          <AssociationSet Name="MetaMeta" Association="LTGModel.MetaMeta">
+            <End Role="Meta" EntitySet="Metas" />
+            <End Role="Meta1" EntitySet="Metas" />
+          </AssociationSet>
+          <AssociationSet Name="MetaPackage" Association="LTGModel.MetaPackage">
+            <End Role="Meta" EntitySet="Metas" />
+            <End Role="Package" EntitySet="Packages" />
+          </AssociationSet>
+          <EntitySet Name="ScanDirs" EntityType="LTGModel.ScanDir" />
+        </EntityContainer>
+        <EntityType Name="DocType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Templates" Relationship="LTGModel.FK_Template_Doctype" FromRole="DocType" ToRole="Template" />
+        </EntityType>
+        <EntityType Name="Environment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CodeBefore" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CodeAfter" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TemplateEnvironments" Relationship="LTGModel.FK_TemplateEnvironment_to_Environment" FromRole="Environment" ToRole="TemplateEnvironment" />
+          <NavigationProperty Name="Packages" Relationship="LTGModel.EnvironmentPackage" FromRole="Environment" ToRole="Package" />
+          <NavigationProperty Name="Metas" Relationship="LTGModel.MetaEnvironment" FromRole="Environment" ToRole="Meta" />
+        </EntityType>
+        <EntityType Name="Langue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Templates" Relationship="LTGModel.FK_Template_Langue" FromRole="Langue" ToRole="Template" />
+        </EntityType>
+        <EntityType Name="Macro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TemplateMacroes" Relationship="LTGModel.FK_TemplateMacro_to_Macro" FromRole="Macro" ToRole="TemplateMacro" />
+          <NavigationProperty Name="Packages" Relationship="LTGModel.MacroPackage" FromRole="Macro" ToRole="Package" />
+          <NavigationProperty Name="Metas" Relationship="LTGModel.MetaMacro" FromRole="Macro" ToRole="Meta" />
+        </EntityType>
+        <EntityType Name="Meta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TemplateMetas" Relationship="LTGModel.FK_TemplateMeta_to_Meta" FromRole="Meta" ToRole="TemplateMeta" />
+          <NavigationProperty Name="Environments" Relationship="LTGModel.MetaEnvironment" FromRole="Meta" ToRole="Environment" />
+          <NavigationProperty Name="Macroes" Relationship="LTGModel.MetaMacro" FromRole="Meta" ToRole="Macro" />
+          <NavigationProperty Name="Meta1" Relationship="LTGModel.MetaMeta" FromRole="Meta" ToRole="Meta1" />
+          <NavigationProperty Name="Metas" Relationship="LTGModel.MetaMeta" FromRole="Meta1" ToRole="Meta" />
+          <NavigationProperty Name="Packages" Relationship="LTGModel.MetaPackage" FromRole="Meta" ToRole="Package" />
+        </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TemplatePackages" Relationship="LTGModel.FK_TemplatePackage_to_Package" FromRole="Package" ToRole="TemplatePackage" />
+          <NavigationProperty Name="Environments" Relationship="LTGModel.EnvironmentPackage" FromRole="Package" ToRole="Environment" />
+          <NavigationProperty Name="Macroes" Relationship="LTGModel.MacroPackage" FromRole="Package" ToRole="Macro" />
+          <NavigationProperty Name="Metas" Relationship="LTGModel.MetaPackage" FromRole="Package" ToRole="Meta" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LangueID" Type="Int32" Nullable="false" />
+          <Property Name="DocTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DocType" Relationship="LTGModel.FK_Template_Doctype" FromRole="Template" ToRole="DocType" />
+          <NavigationProperty Name="Langue" Relationship="LTGModel.FK_Template_Langue" FromRole="Template" ToRole="Langue" />
+          <NavigationProperty Name="TemplateEnvironments" Relationship="LTGModel.FK_TemplateEnvironment_to_Template" FromRole="Template" ToRole="TemplateEnvironment" />
+          <NavigationProperty Name="TemplateMacroes" Relationship="LTGModel.FK_TemplateMacro_to_Template" FromRole="Template" ToRole="TemplateMacro" />
+          <NavigationProperty Name="TemplateMetas" Relationship="LTGModel.FK_TemplateMeta_to_Template" FromRole="Template" ToRole="TemplateMeta" />
+          <NavigationProperty Name="TemplatePackages" Relationship="LTGModel.FK_TemplatePackage_to_Template" FromRole="Template" ToRole="TemplatePackage" />
+          <Property Name="Hyperref" Type="Boolean" />
+          <Property Name="Encoding" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TemplateEnvironment">
+          <Key>
+            <PropertyRef Name="Template_FK" />
+            <PropertyRef Name="Environment_FK" />
+          </Key>
+          <Property Name="Template_FK" Type="Int32" Nullable="false" />
+          <Property Name="Environment_FK" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Environment" Relationship="LTGModel.FK_TemplateEnvironment_to_Environment" FromRole="TemplateEnvironment" ToRole="Environment" />
+          <NavigationProperty Name="Template" Relationship="LTGModel.FK_TemplateEnvironment_to_Template" FromRole="TemplateEnvironment" ToRole="Template" />
+        </EntityType>
+        <EntityType Name="TemplateMacro">
+          <Key>
+            <PropertyRef Name="Template_FK" />
+            <PropertyRef Name="Macro_FK" />
+          </Key>
+          <Property Name="Template_FK" Type="Int32" Nullable="false" />
+          <Property Name="Macro_FK" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Macro" Relationship="LTGModel.FK_TemplateMacro_to_Macro" FromRole="TemplateMacro" ToRole="Macro" />
+          <NavigationProperty Name="Template" Relationship="LTGModel.FK_TemplateMacro_to_Template" FromRole="TemplateMacro" ToRole="Template" />
+        </EntityType>
+        <EntityType Name="TemplateMeta">
+          <Key>
+            <PropertyRef Name="Template_FK" />
+            <PropertyRef Name="Meta_FK" />
+          </Key>
+          <Property Name="Template_FK" Type="Int32" Nullable="false" />
+          <Property Name="Meta_FK" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Meta" Relationship="LTGModel.FK_TemplateMeta_to_Meta" FromRole="TemplateMeta" ToRole="Meta" />
+          <NavigationProperty Name="Template" Relationship="LTGModel.FK_TemplateMeta_to_Template" FromRole="TemplateMeta" ToRole="Template" />
+        </EntityType>
+        <EntityType Name="TemplatePackage">
+          <Key>
+            <PropertyRef Name="Template_FK" />
+            <PropertyRef Name="Package_FK" />
+          </Key>
+          <Property Name="Template_FK" Type="Int32" Nullable="false" />
+          <Property Name="Package_FK" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Package" Relationship="LTGModel.FK_TemplatePackage_to_Package" FromRole="TemplatePackage" ToRole="Package" />
+          <NavigationProperty Name="Template" Relationship="LTGModel.FK_TemplatePackage_to_Template" FromRole="TemplatePackage" ToRole="Template" />
+        </EntityType>
+        <Association Name="FK_Template_Doctype">
+          <End Type="LTGModel.DocType" Role="DocType" Multiplicity="1" />
+          <End Type="LTGModel.Template" Role="Template" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Template">
+              <PropertyRef Name="DocTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateEnvironment_to_Environment">
+          <End Type="LTGModel.Environment" Role="Environment" Multiplicity="1" />
+          <End Type="LTGModel.TemplateEnvironment" Role="TemplateEnvironment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Environment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateEnvironment">
+              <PropertyRef Name="Environment_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Template_Langue">
+          <End Type="LTGModel.Langue" Role="Langue" Multiplicity="1" />
+          <End Type="LTGModel.Template" Role="Template" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Langue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Template">
+              <PropertyRef Name="LangueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateMacro_to_Macro">
+          <End Type="LTGModel.Macro" Role="Macro" Multiplicity="1" />
+          <End Type="LTGModel.TemplateMacro" Role="TemplateMacro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Macro">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateMacro">
+              <PropertyRef Name="Macro_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateMeta_to_Meta">
+          <End Type="LTGModel.Meta" Role="Meta" Multiplicity="1" />
+          <End Type="LTGModel.TemplateMeta" Role="TemplateMeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateMeta">
+              <PropertyRef Name="Meta_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplatePackage_to_Package">
+          <End Type="LTGModel.Package" Role="Package" Multiplicity="1" />
+          <End Type="LTGModel.TemplatePackage" Role="TemplatePackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplatePackage">
+              <PropertyRef Name="Package_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateEnvironment_to_Template">
+          <End Type="LTGModel.Template" Role="Template" Multiplicity="1" />
+          <End Type="LTGModel.TemplateEnvironment" Role="TemplateEnvironment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateEnvironment">
+              <PropertyRef Name="Template_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateMacro_to_Template">
+          <End Type="LTGModel.Template" Role="Template" Multiplicity="1" />
+          <End Type="LTGModel.TemplateMacro" Role="TemplateMacro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateMacro">
+              <PropertyRef Name="Template_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateMeta_to_Template">
+          <End Type="LTGModel.Template" Role="Template" Multiplicity="1" />
+          <End Type="LTGModel.TemplateMeta" Role="TemplateMeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateMeta">
+              <PropertyRef Name="Template_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplatePackage_to_Template">
+          <End Type="LTGModel.Template" Role="Template" Multiplicity="1" />
+          <End Type="LTGModel.TemplatePackage" Role="TemplatePackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplatePackage">
+              <PropertyRef Name="Template_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EnvironmentPackage">
+          <End Type="LTGModel.Environment" Role="Environment" Multiplicity="*" />
+          <End Type="LTGModel.Package" Role="Package" Multiplicity="*" />
+        </Association>
+        <Association Name="MacroPackage">
+          <End Type="LTGModel.Macro" Role="Macro" Multiplicity="*" />
+          <End Type="LTGModel.Package" Role="Package" Multiplicity="*" />
+        </Association>
+        <Association Name="MetaEnvironment">
+          <End Type="LTGModel.Environment" Role="Environment" Multiplicity="*" />
+          <End Type="LTGModel.Meta" Role="Meta" Multiplicity="*" />
+        </Association>
+        <Association Name="MetaMacro">
+          <End Type="LTGModel.Macro" Role="Macro" Multiplicity="*" />
+          <End Type="LTGModel.Meta" Role="Meta" Multiplicity="*" />
+        </Association>
+        <Association Name="MetaMeta">
+          <End Type="LTGModel.Meta" Role="Meta" Multiplicity="*" />
+          <End Type="LTGModel.Meta" Role="Meta1" Multiplicity="*" />
+        </Association>
+        <Association Name="MetaPackage">
+          <End Type="LTGModel.Meta" Role="Meta" Multiplicity="*" />
+          <End Type="LTGModel.Package" Role="Package" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ScanDir">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Path" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LTGModelStoreContainer" CdmEntityContainer="LTGEntities">
+          <EntitySetMapping Name="DocTypes">
+            <EntityTypeMapping TypeName="LTGModel.DocType">
+              <MappingFragment StoreEntitySet="DocType">
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Environments">
+            <EntityTypeMapping TypeName="LTGModel.Environment">
+              <MappingFragment StoreEntitySet="Environment">
+                <ScalarProperty Name="CodeAfter" ColumnName="CodeAfter" />
+                <ScalarProperty Name="CodeBefore" ColumnName="CodeBefore" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Langues">
+            <EntityTypeMapping TypeName="LTGModel.Langue">
+              <MappingFragment StoreEntitySet="Langue">
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Macroes">
+            <EntityTypeMapping TypeName="LTGModel.Macro">
+              <MappingFragment StoreEntitySet="Macro">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Metas">
+            <EntityTypeMapping TypeName="LTGModel.Meta">
+              <MappingFragment StoreEntitySet="Meta">
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Packages">
+            <EntityTypeMapping TypeName="LTGModel.Package">
+              <MappingFragment StoreEntitySet="Package">
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Templates">
+            <EntityTypeMapping TypeName="LTGModel.Template">
+              <MappingFragment StoreEntitySet="Template">
+                <ScalarProperty Name="Encoding" ColumnName="Encoding" />
+                <ScalarProperty Name="Hyperref" ColumnName="Hyperref" />
+                <ScalarProperty Name="DocTypeID" ColumnName="DocTypeID" />
+                <ScalarProperty Name="LangueID" ColumnName="LangueID" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplateEnvironments">
+            <EntityTypeMapping TypeName="LTGModel.TemplateEnvironment">
+              <MappingFragment StoreEntitySet="TemplateEnvironment">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Environment_FK" ColumnName="Environment_FK" />
+                <ScalarProperty Name="Template_FK" ColumnName="Template_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplateMacroes">
+            <EntityTypeMapping TypeName="LTGModel.TemplateMacro">
+              <MappingFragment StoreEntitySet="TemplateMacro">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Macro_FK" ColumnName="Macro_FK" />
+                <ScalarProperty Name="Template_FK" ColumnName="Template_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplateMetas">
+            <EntityTypeMapping TypeName="LTGModel.TemplateMeta">
+              <MappingFragment StoreEntitySet="TemplateMeta">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Meta_FK" ColumnName="Meta_FK" />
+                <ScalarProperty Name="Template_FK" ColumnName="Template_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplatePackages">
+            <EntityTypeMapping TypeName="LTGModel.TemplatePackage">
+              <MappingFragment StoreEntitySet="TemplatePackage">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Package_FK" ColumnName="Package_FK" />
+                <ScalarProperty Name="Template_FK" ColumnName="Template_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="EnvironmentPackage" TypeName="LTGModel.EnvironmentPackage" StoreEntitySet="EnvironmentPackage">
+            <EndProperty Name="Package">
+              <ScalarProperty Name="Id" ColumnName="Package_FK" />
+            </EndProperty>
+            <EndProperty Name="Environment">
+              <ScalarProperty Name="Id" ColumnName="Environment_FK" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MacroPackage" TypeName="LTGModel.MacroPackage" StoreEntitySet="MacroPackage">
+            <EndProperty Name="Package">
+              <ScalarProperty Name="Id" ColumnName="Package_FK" />
+            </EndProperty>
+            <EndProperty Name="Macro">
+              <ScalarProperty Name="Id" ColumnName="Macro_FK" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MetaEnvironment" TypeName="LTGModel.MetaEnvironment" StoreEntitySet="MetaEnvironment">
+            <EndProperty Name="Meta">
+              <ScalarProperty Name="Id" ColumnName="Meta_FK" />
+            </EndProperty>
+            <EndProperty Name="Environment">
+              <ScalarProperty Name="Id" ColumnName="Environment_FK" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MetaMacro" TypeName="LTGModel.MetaMacro" StoreEntitySet="MetaMacro">
+            <EndProperty Name="Meta">
+              <ScalarProperty Name="Id" ColumnName="Meta_FK" />
+            </EndProperty>
+            <EndProperty Name="Macro">
+              <ScalarProperty Name="Id" ColumnName="Macro_FK" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MetaMeta" TypeName="LTGModel.MetaMeta" StoreEntitySet="MetaMeta">
+            <EndProperty Name="Meta1">
+              <ScalarProperty Name="Id" ColumnName="Meta2_FK" />
+            </EndProperty>
+            <EndProperty Name="Meta">
+              <ScalarProperty Name="Id" ColumnName="Meta1_FK" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MetaPackage" TypeName="LTGModel.MetaPackage" StoreEntitySet="MetaPackage">
+            <EndProperty Name="Package">
+              <ScalarProperty Name="Id" ColumnName="Package_FK" />
+            </EndProperty>
+            <EndProperty Name="Meta">
+              <ScalarProperty Name="Id" ColumnName="Meta_FK" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="ScanDirs">
+            <EntityTypeMapping TypeName="LTGModel.ScanDir">
+              <MappingFragment StoreEntitySet="ScanDir">
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,49 @@
+﻿<Window x:Class="WpfMainView.Views.WindowGeneratedCode"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMainView.Views"
+        mc:Ignorable="d"
+        Title="WindowGeneratedCode" Height="400" Width="370">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer>
+            <TextBox
+            x:Name="Code"
+            Grid.Row="0"
+            ScrollViewer.CanContentScroll="True"
+            IsReadOnly="True" 
+            FontFamily="Courier New"
+            >
+                Generated code...
+            </TextBox>
+          
+            
+        </ScrollViewer>
+        
+        <StackPanel
+            Grid.Row="1"
+            Orientation="Horizontal"
+            FlowDirection="RightToLeft">
+            <Button Content="Fermer"
+                    Name="btn_Fermer"
+                    Margin="3"
+                    Width="80" Click="Button_Click"/>
+            <Button Content="Sauver"
+                    Name="btn_Sauver"
+                    Margin="3"
+                    Width="80" Click="btn_Sauver_Click"/>
+            <Button Content="Copier"
+                    Name="btn_Copier"
+                    Margin="3"
+                    Width="80" Click="btn_Copier_Click"/>
+
+        </StackPanel>
+
+
+    </Grid>
+</Window>

@@ -1,0 +1,49 @@
+﻿<Metro:MetroWindow x:Class="WpfMainView.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMainView"
+        mc:Ignorable="d"
+        xmlns:Metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Controls="clr-namespace:WpfMainView.Controls"
+        xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro" Dialog:DialogParticipation.Register="{Binding}"
+    Title="LaTeXPlate" Height="500" Width="620">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\Thierry\Dropbox\Programmation\IDEC\LaTeX_Templates\LatexTemplateGenerator\Images\velin.jpg"
+                        Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" >
+            <MenuItem Header="Fichier" Name="menuFichier"  >
+                <MenuItem Header="Nouveau template" Command="{Binding CommandeNouveau}" />
+                <MenuItem Header="Ouvrir template existant"/>
+                <MenuItem Header="Sauver"/>
+            </MenuItem>
+            <MenuItem Header="Edition">
+                <MenuItem Header="Templates" Name="menTemplates" Click="menuTemplates_Click" Command="{Binding CommandeTemplate}" />
+                <MenuItem Header="Macros" Name="menuMacro" Click="menuMacro_Click" Command="{Binding CommandeMacro}"/>
+                <MenuItem Header="Environments" Name="menuEnv" Click="menuEnv_Click" Command="{Binding CommandeEnvironment}"/>
+                <MenuItem Header="Meta-Packages" Name="menuMeta" Click="menuMeta_Click" Command="{Binding CommandeMeta}"/>
+            </MenuItem>
+
+            <MenuItem Header="Configuration" Name="menuAbout">
+                <MenuItem 
+                    Header="Gestion des packages"
+                    Name="mnu_Scan" Click="mnu_Scan_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Fermer" Name="menuClose" Click="menuClose_Click"/>
+        </Menu>
+        <Controls:UCManager
+            x:Name="UCManager"
+            Grid.Row="1"
+            />
+        <TextBlock Text="LaTeXPlate Copyright - 2018" Grid.Row="2"/>
+    </Grid>
+</Metro:MetroWindow>

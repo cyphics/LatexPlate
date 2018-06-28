@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c16ebb40a083441eaf2c011bdc03d666" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="LTGModel.TempPack" Width="1.5" PointX="7" PointY="2" />
+        <AssociationConnector Association="LTGModel.FK_TempPack_to_Package" />
+        <AssociationConnector Association="LTGModel.FK_TempPack_to_Template" />
+        <EntityTypeShape EntityType="LTGModel.TempMacro" Width="1.5" PointX="8.5" PointY="1.75" />
+        <AssociationConnector Association="LTGModel.FK_TempMacro_to_Macro" />
+        <AssociationConnector Association="LTGModel.FK_TempPack_to_Package" />
+        <AssociationConnector Association="LTGModel.FK_TempMacro_to_Template" />
+        <AssociationConnector Association="LTGModel.FK_TempPack_to_Template" />
+        <AssociationConnector Association="LTGModel.FK_TempMacro_to_Macro" />
+        <AssociationConnector Association="LTGModel.FK_TempPack_to_Package" />
+        <AssociationConnector Association="LTGModel.FK_TempMacro_to_Template" />
+        <AssociationConnector Association="LTGModel.FK_TempPack_to_Template" />
+        <EntityTypeShape EntityType="LTGModel.DocType" Width="1.5" PointX="15.75" PointY="3.875" />
+        <EntityTypeShape EntityType="LTGModel.Environment" Width="1.5" PointX="13.875" PointY="10.5" />
+        <EntityTypeShape EntityType="LTGModel.Langue" Width="1.5" PointX="15.75" PointY="5.875" />
+        <EntityTypeShape EntityType="LTGModel.Macro" Width="1.5" PointX="11.875" PointY="10.5" />
+        <EntityTypeShape EntityType="LTGModel.Meta" Width="1.5" PointX="15.75" PointY="10.5" />
+        <EntityTypeShape EntityType="LTGModel.Package" Width="1.5" PointX="9.75" PointY="3.875" />
+        <EntityTypeShape EntityType="LTGModel.Template" Width="1.5" PointX="13.75" PointY="3.875" />
+        <EntityTypeShape EntityType="LTGModel.TemplateEnvironment" Width="1.5" PointX="13.875" PointY="8" />
+        <EntityTypeShape EntityType="LTGModel.TemplateMacro" Width="1.5" PointX="11.875" PointY="8" />
+        <EntityTypeShape EntityType="LTGModel.TemplateMeta" Width="1.5" PointX="15.75" PointY="8" />
+        <EntityTypeShape EntityType="LTGModel.TemplatePackage" Width="1.5" PointX="11.75" PointY="3.875" />
+        <AssociationConnector Association="LTGModel.FK_Template_Doctype" />
+        <AssociationConnector Association="LTGModel.FK_TemplateEnvironment_to_Environment" />
+        <AssociationConnector Association="LTGModel.FK_Template_Langue" />
+        <AssociationConnector Association="LTGModel.FK_TemplateMacro_to_Macro" />
+        <AssociationConnector Association="LTGModel.FK_TemplateMeta_to_Meta" />
+        <AssociationConnector Association="LTGModel.FK_TemplatePackage_to_Package" />
+        <AssociationConnector Association="LTGModel.FK_TemplateEnvironment_to_Template" />
+        <AssociationConnector Association="LTGModel.FK_TemplateMacro_to_Template" />
+        <AssociationConnector Association="LTGModel.FK_TemplateMeta_to_Template" />
+        <AssociationConnector Association="LTGModel.FK_TemplatePackage_to_Template" />
+        <AssociationConnector Association="LTGModel.EnvironmentPackage" />
+        <AssociationConnector Association="LTGModel.MacroPackage" />
+        <AssociationConnector Association="LTGModel.MetaEnvironment" />
+        <AssociationConnector Association="LTGModel.MetaMacro" />
+        <AssociationConnector Association="LTGModel.MetaMeta" />
+        <AssociationConnector Association="LTGModel.MetaPackage" />
+        <EntityTypeShape EntityType="LTGModel.ScanDir" Width="1.5" PointX="13.75" PointY="1.625" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

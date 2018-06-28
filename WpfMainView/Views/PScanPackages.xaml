@@ -1,0 +1,64 @@
+﻿<Window x:Class="WpfMainView.Views.PScanPackages"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMainView.Views"
+        mc:Ignorable="d"
+        Title="PScanPackages" Height="450" Width="800">
+
+        <StackPanel
+            Orientation="Vertical"
+            VerticalAlignment="Stretch">
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Left">
+                <StackPanel
+                    VerticalAlignment="Center"
+                    Orientation="Vertical">
+                    
+                    <Button 
+                        Grid.Column="0" 
+                        Content="Ajouter un répertoire"
+                        Command="{Binding CommandAddDirectory}"/>
+                    <Button 
+                        Grid.Column="1" 
+                        Content="Retirer un répertoire"
+                        Command="{Binding CommandRemoveDirectory}"/>
+                    <Separator Opacity="0" Height="20"/>
+                    <Button Grid.Column="0" Content="Purger liste"
+                        Command="{Binding CommandPurge}"/>
+                    <Button Grid.Column="1" Content="Scanner disque"
+                        Command="{Binding CommandScan}"/>
+                    <Separator Opacity="0" Height="20"/>
+                    <Button
+                        Content="Sauver"
+                        Command="{Binding CommandSave}"/>
+
+            </StackPanel>
+                
+                <DataGrid 
+                    x:Name="dgDirList" 
+                    HeadersVisibility="None"
+                    Margin="3" 
+                    AutoGenerateColumns="False" 
+                    IsReadOnly="True" CanUserAddRows="False" ScrollViewer.CanContentScroll="True"
+                    ItemsSource="{Binding ListDirectories}" 
+                    SelectionMode="Single" SelectedItem="{Binding CurrentDir}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn  Binding="{Binding Path}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                
+            </StackPanel>
+            
+            <StackPanel
+                Orientation="Horizontal">
+                
+            </StackPanel>
+            
+        </StackPanel>
+        
+        
+
+</Window>
